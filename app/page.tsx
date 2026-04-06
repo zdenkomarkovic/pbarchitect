@@ -62,7 +62,7 @@ export default function HomePage() {
               Novi Sad — Srbija
             </p>
             <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-6xl font-light leading-none text-white ">
-              Arhitektura koja traje Arhitektonski Biro <br /> PB ARCHITECT
+              Arhitektura koja traje - Arhitektonski Biro <br /> PB ARCHITECT
             </h1>
             <p className="mt-4  text-sm leading-relaxed text-[#aaa] md:text-lg">
               Projektujemo, nadziremo i planiramo. PB Architect je partner koji vas vodi od prve

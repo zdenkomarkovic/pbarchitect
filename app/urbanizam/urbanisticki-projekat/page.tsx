@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -76,7 +76,9 @@ export default function UrbanistickiProjekatPage() {
                 </ul>
               </div>
 
-              <ImagePlaceholder label="Urbanistički projekat — primer" aspectRatio="video" />
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/urbanisticki.webp" alt="Urbanistički projekat — primer" fill className="object-cover" />
+              </div>
             </div>
 
             <div className="space-y-6">

@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -122,8 +122,24 @@ export default function IDRPage() {
             </div>
 
             <div className="space-y-6">
-              <ImagePlaceholder label="IDR — primer idejnog rešenja" aspectRatio="portrait" />
-              <ImagePlaceholder label="Situacioni plan" aspectRatio="square" />
+              <div className="relative w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/idr.webp"
+                  alt="IDR — primer idejnog rešenja"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
+              <div className="relative w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/stc.webp"
+                  alt="Situacioni plan"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -67,10 +67,16 @@ export default function EnterijePage() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <ImagePlaceholder label="Dnevna soba" aspectRatio="portrait" />
-              <ImagePlaceholder label="Kuhinja" aspectRatio="portrait" />
-              <ImagePlaceholder label="Spavaća soba" aspectRatio="square" className="col-span-2" />
+            <div className="flex flex-col gap-4">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/dnevnasoba.webp" alt="Dnevna soba" fill className="object-cover" />
+              </div>
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/kuhinja.webp" alt="Kuhinja" fill className="object-cover" />
+              </div>
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/spavacasoba.webp" alt="Spavaća soba" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </div>

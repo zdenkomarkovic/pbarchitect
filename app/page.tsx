@@ -7,8 +7,7 @@ import Image from "next/image";
 
 export const metadata = buildMetadata({
   title: "Početna",
-  description:
-    "PB Architect — projektovanje, inženjering i urbanizam u Novom Sadu.",
+  description: "PB Architect — projektovanje, inženjering i urbanizam u Novom Sadu.",
 });
 
 const services = [
@@ -39,47 +38,50 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#1a1a1a]">
+      <section className="relative flex h-[calc(100vh-4.5rem)] flex-col justify-end overflow-hidden bg-[#1a1a1a]">
         {/* Desktop hero */}
         <Image
-          src="/hero.png"
+          src="/hero.webp"
           alt="PB Architect"
           fill
-          className="hidden object-cover opacity-40 md:block"
+          className="hidden object-cover md:block"
           priority
         />
         {/* Mobile hero */}
         <Image
-          src="/heromob.png"
+          src="/heromob.webp"
           alt="PB Architect"
           fill
-          className="block object-cover opacity-40 md:hidden"
+          className="block object-cover md:hidden"
           priority
         />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 md:py-48">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#c4a84f]">
-            Novi Sad — Srbija
-          </p>
-          <h1 className="font-[family-name:var(--font-heading)] max-w-3xl text-6xl font-light leading-none text-white md:text-8xl">
-            Arhitektura koja traje
-          </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-[#aaa]">
-            Projektujemo, nadziremo i planiramo. PB Architect je partner koji
-            vas vodi od prve ideje do gotovog objekta.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/projektovanje"
-              className="bg-[#c4a84f] px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#a8893a]"
-            >
-              Naše usluge
-            </Link>
-            <a
-              href="#kontakt"
-              className="border border-white/30 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:border-white"
-            >
-              Kontakt
-            </a>
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/80 z-[1]" /> */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl  pb-6 pt-8">
+          <div className=" px-6">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#c4a84f]">
+              Novi Sad — Srbija
+            </p>
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-6xl font-light leading-none text-white ">
+              Arhitektura koja traje Arhitektonski Biro <br /> PB ARCHITECT
+            </h1>
+            <p className="mt-4  text-sm leading-relaxed text-[#aaa] md:text-lg">
+              Projektujemo, nadziremo i planiramo. PB Architect je partner koji vas vodi od prve
+              ideje do gotovog objekta.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-4">
+              <Link
+                href="/projektovanje"
+                className="bg-[#c4a84f] px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#a8893a]"
+              >
+                Naše usluge
+              </Link>
+              <a
+                href="#kontakt"
+                className="border border-white/30 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:border-white"
+              >
+                Kontakt
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -106,7 +108,7 @@ export default function HomePage() {
       {/* About strip */}
       <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[2fr_3fr]">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
                 O nama
@@ -115,49 +117,72 @@ export default function HomePage() {
                 Stručnost i posvećenost u svakom projektu
               </h2>
               <p className="mt-6 text-[#6b6b6b] leading-relaxed">
-                PB Architect je projektantski biro sa sedištem u Novom Sadu.
-                Bavimo se izradom tehničke dokumentacije, urbanizmom i
-                tehničkim nadzorom. Svaki projekat tretiramo individualno —
-                jer svaki klijent ima jedinstven prostor, budžet i viziju.
+                PB Architect je projektantski biro sa sedištem u Novom Sadu. Bavimo se izradom
+                tehničke dokumentacije, urbanizmom i tehničkim nadzorom. Svaki projekat tretiramo
+                individualno — jer svaki klijent ima jedinstven prostor, budžet i viziju.
               </p>
               <p className="mt-4 text-[#6b6b6b] leading-relaxed">
-                Sarađujemo sa investitorima, izvođačima i javnim institucijama
-                kroz sve faze izgradnje, od ishođenja dozvola do tehničkog
-                prijema objekta.
+                Sarađujemo sa investitorima, izvođačima i javnim institucijama kroz sve faze
+                izgradnje, od ishođenja dozvola do tehničkog prijema objekta.
               </p>
             </div>
-            <ImagePlaceholder label="O nama — fotografija" aspectRatio="square" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <Image
+                src="/Gemini_Generated_Image_rjt8y8rjt8y8rjt8.webp"
+                alt="O nama — PB Architect"
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Contact strip */}
-      <section className="bg-[#1a1a1a] px-6 py-20 text-white">
+      <section className="bg-[#c4a84f] px-6 py-20 text-[#1a1a1a]">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl font-light md:text-4xl">
                 Pokrenite vaš projekat danas
               </h2>
-              <p className="mt-2 text-[#999]">
-                Kontaktirajte nas za besplatnu konsultaciju.
-              </p>
+              <p className="mt-2 text-[#1a1a1a]">Kontaktirajte nas za besplatnu konsultaciju.</p>
             </div>
-            <div className="flex flex-col gap-3 text-sm">
+            <div className="flex flex-col gap-3 text-base">
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="flex items-center gap-3 text-[#999] transition-colors hover:text-white"
+                className="flex items-center gap-3 text-[#1a1a1a] transition-colors hover:text-[#1a1a1a]"
               >
-                <span className="text-[#c4a84f]">✉</span> {CONTACT.email}
+                <span className="text-xl">✉</span> {CONTACT.email}
               </a>
               <a
                 href={CONTACT.phoneHref}
-                className="flex items-center gap-3 text-[#999] transition-colors hover:text-white"
+                className="flex items-center gap-3 text-[#1a1a1a] transition-colors hover:text-[#1a1a1a]"
               >
-                <span className="text-[#c4a84f]">✆</span> {CONTACT.phone}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="shrink-0"
+                >
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>{" "}
+                {CONTACT.phone}
               </a>
-              <p className="flex items-center gap-3 text-[#999]">
-                <span className="text-[#c4a84f]">⌖</span> {CONTACT.address}
+              <p className="flex items-center gap-3 text-[#1a1a1a]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="shrink-0"
+                >
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>{" "}
+                {CONTACT.address}
               </p>
             </div>
           </div>

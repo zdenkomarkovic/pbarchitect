@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -68,9 +68,8 @@ export default function ParcelacijaPage() {
               </Link>
             </div>
 
-            <div className="space-y-4">
-              <ImagePlaceholder label="Parcelacija — katastarsko-topografski plan" aspectRatio="square" />
-              <ImagePlaceholder label="Projekat parcelacije" aspectRatio="video" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <Image src="/parcelizacija.webp" alt="Projekat parcelacije" fill className="object-cover" />
             </div>
           </div>
         </div>

@@ -92,7 +92,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#e0ddd8] bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-2">
         <Link href="/" className="flex items-center">
           <Image
             src="/logo.png"
@@ -140,9 +140,15 @@ export function Header() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Otvori meni"
         >
-          <span className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-[#1a1a1a] transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`} />
+          <span
+            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+          />
         </button>
       </div>
 
@@ -165,7 +171,15 @@ export function Header() {
                 className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-[#1a1a1a]"
               >
                 Projektovanje
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileProjOpen ? "rotate-180" : ""}`}>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={`transition-transform ${mobileProjOpen ? "rotate-180" : ""}`}
+                >
                   <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
@@ -192,7 +206,15 @@ export function Header() {
                 className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-[#1a1a1a]"
               >
                 Urbanizam
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`transition-transform ${mobileUrbOpen ? "rotate-180" : ""}`}>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className={`transition-transform ${mobileUrbOpen ? "rotate-180" : ""}`}
+                >
                   <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
@@ -212,13 +234,25 @@ export function Header() {
               )}
             </div>
 
-            <Link href="/inzenjering-i-nadzor" onClick={() => setMobileOpen(false)} className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]">
+            <Link
+              href="/inzenjering-i-nadzor"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
+            >
               Inženjering i nadzor
             </Link>
-            <Link href="/zastita-zivotne-sredine" onClick={() => setMobileOpen(false)} className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]">
+            <Link
+              href="/zastita-zivotne-sredine"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
+            >
               Zaštita životne sredine
             </Link>
-            <Link href="#kontakt" onClick={() => setMobileOpen(false)} className="py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]">
+            <Link
+              href="#kontakt"
+              onClick={() => setMobileOpen(false)}
+              className="py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
+            >
               Kontakt
             </Link>
           </nav>

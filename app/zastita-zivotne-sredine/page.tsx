@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 
 export const metadata = buildMetadata({
   title: "Zaštita životne sredine",
@@ -20,10 +20,6 @@ const docs = [
   {
     title: "Dokumenta za upravljanje otpadom",
     body: "Planovi upravljanja otpadom za privredne subjekte i postrojenja, u skladu sa propisima o upravljanju otpadom.",
-  },
-  {
-    title: "Plan zaštite od udesa",
-    body: "Izrada planova za zaštitu od udesa u opasnim i visokorizičnim industrijskim postrojenjima, sa identifikacijom hazarda i merama prevencije.",
   },
   {
     title: "Plan zaštite od požara",
@@ -59,10 +55,12 @@ export default function ZastitaPage() {
                 objekte u zoni zaštićenih područja.
               </p>
             </div>
-            <ImagePlaceholder label="Životna sredina" aspectRatio="video" />
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <Image src="/zastita.webp" alt="Zaštita životne sredine" fill className="object-cover" />
+            </div>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {docs.map((doc) => (
               <div
                 key={doc.title}

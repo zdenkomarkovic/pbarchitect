@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -98,8 +98,15 @@ export default function PGDPage() {
             </div>
 
             <div className="space-y-6">
-              <ImagePlaceholder label="PGD — osnova objekta" aspectRatio="portrait" />
-              <ImagePlaceholder label="Tehnički crtež" aspectRatio="square" />
+              <div className="relative w-full overflow-hidden rounded-lg">
+                <Image
+                  src="/pgd.webp"
+                  alt="PGD — osnova objekta"
+                  width={800}
+                  height={600}
+                  className="w-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>

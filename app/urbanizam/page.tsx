@@ -14,18 +14,21 @@ const subServices = [
     description:
       "Izrada urbanističkih projekata za urbanističko-arhitektonsko oblikovanje lokaliteta i ishođenje lokacijskih uslova.",
     href: "/urbanizam/urbanisticki-projekat",
+    image: "/urbanisticki.webp",
   },
   {
     title: "Projekat parcelacije / preparcelacije",
     description:
       "Formiranje i reorganizacija katastarskih parcela kao uslov za kvalitetniju izgradnju i legalizaciju na datim lokalitetima.",
     href: "/urbanizam/projekat-parcelacije",
+    image: "/parcelizacija.webp",
   },
   {
     title: "Urbanistički planovi",
     description:
       "Učešće u izradi planova detaljne regulacije (PDR) i ostalih planskih dokumenata na nivou jedinice lokalne samouprave.",
     href: "/urbanizam/urbanisticki-planovi",
+    image: "/urbanizam.webp",
   },
 ];
 

@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = buildMetadata({
@@ -64,12 +64,8 @@ export default function EksterijerPage() {
               </Link>
             </div>
 
-            <div className="space-y-4">
-              <ImagePlaceholder label="Uređeno dvorište" aspectRatio="video" />
-              <div className="grid grid-cols-2 gap-4">
-                <ImagePlaceholder label="Terasa" aspectRatio="square" />
-                <ImagePlaceholder label="Vrt" aspectRatio="square" />
-              </div>
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+              <Image src="/dvoriste.webp" alt="Uređeno dvorište" fill className="object-cover" />
             </div>
           </div>
         </div>

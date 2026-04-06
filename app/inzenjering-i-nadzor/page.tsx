@@ -1,6 +1,6 @@
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
+import Image from "next/image";
 
 export const metadata = buildMetadata({
   title: "Inženjering i nadzor",
@@ -75,8 +75,12 @@ export default function InzeenjeringPage() {
             </div>
 
             <div className="space-y-4">
-              <ImagePlaceholder label="Nadzor na gradilištu" aspectRatio="portrait" />
-              <ImagePlaceholder label="Tehnički pregled" aspectRatio="video" />
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/nadzor.webp" alt="Nadzor na gradilištu" fill className="object-cover" />
+              </div>
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                <Image src="/pregled.webp" alt="Tehnički pregled" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </div>

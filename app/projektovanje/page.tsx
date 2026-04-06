@@ -15,30 +15,35 @@ const subServices = [
     description:
       "Početna faza projektovanja kojom se definiše koncepcija objekta i pribavljaju lokacijski uslovi.",
     href: "/projektovanje/idr",
+    image: "/idr.webp",
   },
   {
     title: "PGD — Projekat za građevinsku dozvolu",
     description:
       "Ključna faza tehničke dokumentacije neophodna za ishodovanje rešenja o građevinskoj dozvoli.",
     href: "/projektovanje/pgd",
+    image: "/pgd.webp",
   },
   {
     title: "Enterijer",
     description:
       "Osmišljavamo funkcionalna i estetski dosledna enterijerna rešenja usklađena sa vašim potrebama i stilom.",
     href: "/projektovanje/enterijer",
+    image: "/dnevnasoba.webp",
   },
   {
     title: "Eksterijer",
     description:
       "Projektujemo uređenje dvorišta, parcela, vrtova, ograda, tremova i ostalih spoljnih prostora.",
     href: "/projektovanje/eksterijer",
+    image: "/dvoriste.webp",
   },
   {
     title: "Proračuni troškova",
     description:
       "Izrađujemo precizne proračune investicionih troškova prema aktuelnim tržišnim cenama.",
     href: "/projektovanje/proracuni-troskova",
+    image: "/proracun.webp",
   },
 ];
 

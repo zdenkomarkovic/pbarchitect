@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
   return buildMetadata({
-    title: undefined,
-    description: t("heroSubtitle"),
+    title: t("metaTitle"),
+    description: t("metaDesc"),
     locale,
     localePath: "/",
   });

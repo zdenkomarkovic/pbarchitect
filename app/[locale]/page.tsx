@@ -66,7 +66,8 @@ export default async function HomePage({ params }: Props) {
               {t("heroLocation")}
             </p>
             <h1 className="font-[family-name:var(--font-heading)] text-4xl font-light leading-none text-white md:text-6xl">
-              {t("heroTitle")}
+              <span className="block">{t("heroTitleLine1")}</span>
+              <span className="block">PB ARCHITECT</span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-[#aaa] md:text-lg">
               {t("heroSubtitle")}

@@ -8,7 +8,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "inzenjering" });
-  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc") });
+  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc"), locale, localePath: "/inzenjering-i-nadzor" });
 }
 
 export default async function InzeenjeringPage({ params }: Props) {

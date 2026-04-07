@@ -8,7 +8,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "proracuni" });
-  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc") });
+  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc"), locale, localePath: "/projektovanje/proracuni-troskova" });
 }
 
 export default async function ProracuniPage({ params }: Props) {

@@ -1,21 +1,55 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 
-// Dodaj sve staticke stranice i dinamicki generisi za blog/proizvode
+type PageEntry = {
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+};
+
+const pages: PageEntry[] = [
+  { path: "/", priority: 1, changeFrequency: "monthly" },
+  { path: "/projektovanje", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/projektovanje/idr", priority: 0.8, changeFrequency: "yearly" },
+  { path: "/projektovanje/pgd", priority: 0.8, changeFrequency: "yearly" },
+  { path: "/projektovanje/enterijer", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/projektovanje/eksterijer", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/projektovanje/proracuni-troskova", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/urbanizam", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/urbanizam/urbanisticki-projekat", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/urbanizam/projekat-parcelacije", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/urbanizam/urbanisticki-planovi", priority: 0.7, changeFrequency: "yearly" },
+  { path: "/inzenjering-i-nadzor", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/zastita-zivotne-sredine", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/kontakt", priority: 0.6, changeFrequency: "yearly" },
+];
+
+function srUrl(path: string): string {
+  return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
+}
+
+function enUrl(path: string): string {
+  return path === "/" ? `${SITE_URL}/en` : `${SITE_URL}/en${path}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 1,
-    },
-    // Primer za dinamicke stranice (blog, proizvodi):
-    // ...posts.map((post) => ({
-    //   url: `${SITE_URL}/blog/${post.slug}`,
-    //   lastModified: new Date(post.updatedAt),
-    //   changeFrequency: "weekly" as const,
-    //   priority: 0.8,
-    // })),
-  ];
+  const lastModified = new Date();
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const page of pages) {
+    entries.push({
+      url: srUrl(page.path),
+      lastModified,
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+    });
+    entries.push({
+      url: enUrl(page.path),
+      lastModified,
+      changeFrequency: page.changeFrequency,
+      priority: Math.round(page.priority * 0.9 * 10) / 10,
+    });
+  }
+
+  return entries;
 }

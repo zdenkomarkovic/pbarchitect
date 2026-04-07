@@ -9,7 +9,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "parcelacija" });
-  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc") });
+  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc"), locale, localePath: "/urbanizam/projekat-parcelacije" });
 }
 
 export default async function ParcelacijaPage({ params }: Props) {

@@ -7,7 +7,11 @@
       "Bash(grep -v \"^$\")",
       "Bash(grep -E \"\\\\.\\(tsx?|json\\)$\")",
       "Bash(xargs wc:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(ls E:/Sajtovi/pbarchitect/*.env*)",
+      "Bash(ls E:/Sajtovi/pbarchitect/.env*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)"
     ]
   }
 }

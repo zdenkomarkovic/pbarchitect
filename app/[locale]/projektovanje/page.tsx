@@ -9,7 +9,7 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "projektovanje" });
-  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc") });
+  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc"), locale, localePath: "/projektovanje" });
 }
 
 export default async function ProjektovanjePage({ params }: Props) {

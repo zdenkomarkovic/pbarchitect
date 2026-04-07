@@ -13,6 +13,8 @@ export async function generateMetadata({ params }: Props) {
   return buildMetadata({
     title: undefined,
     description: t("heroSubtitle"),
+    locale,
+    localePath: "/",
   });
 }
 
@@ -46,7 +48,7 @@ export default async function HomePage({ params }: Props) {
       {/* Hero */}
       <section className="relative flex h-[calc(100vh-4.5rem)] flex-col justify-end overflow-hidden bg-[#1a1a1a]">
         <Image
-          src="/hero.webp"
+          src="/hero.png"
           alt="PB Architect"
           fill
           className="hidden object-cover md:block"

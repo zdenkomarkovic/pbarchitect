@@ -6,7 +6,7 @@ interface BuildMetadataOptions {
   description?: string;
   /** Putanja do slike za OG (relativna od /public ili apsolutna URL) */
   image?: string;
-  /** Canonical URL - ako nije naveden, koristi SITE_URL */
+  /** Canonical URL - ako nije naveden, izračunava se iz localePath/locale */
   url?: string;
   /** Da li da noindex ova stranica */
   noIndex?: boolean;
@@ -14,19 +14,21 @@ interface BuildMetadataOptions {
   type?: "website" | "article";
   /** Datum objave (za blog postove) */
   publishedTime?: string;
+  /**
+   * Putanja stranice bez locale prefiksa (npr. "/" ili "/projektovanje").
+   * Koristi se za generisanje hreflang alternata i canonicala.
+   */
+  localePath?: string;
+  /** Locale trenutne stranice ("sr" | "en") */
+  locale?: string;
 }
 
-/**
- * Helper za generisanje Next.js Metadata objekta.
- * Koristiti u svakom page.tsx fajlu.
- *
- * @example
- * // U page.tsx:
- * export const metadata = buildMetadata({
- *   title: "O nama",
- *   description: "Kratki opis stranice",
- * });
- */
+function pageUrl(locale: string, path: string): string {
+  const clean = path === "/" ? "" : path;
+  if (locale === "sr") return `${SITE_URL}${clean}` || SITE_URL;
+  return `${SITE_URL}/${locale}${clean}`;
+}
+
 export function buildMetadata({
   title,
   description,
@@ -35,10 +37,25 @@ export function buildMetadata({
   noIndex = false,
   type = "website",
   publishedTime,
+  localePath,
+  locale,
 }: BuildMetadataOptions = {}): Metadata {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
-  const canonicalUrl = url ?? SITE_URL;
-  const ogImage = image ?? `${SITE_URL}/og-image.png`; // Dodaj og-image.png u /public
+  const ogImage = image ?? `${SITE_URL}/hero.png`;
+
+  // Canonical: eksplicitni url > izračunat iz locale+path > root
+  const canonicalUrl =
+    url ?? (locale && localePath ? pageUrl(locale, localePath) : SITE_URL);
+
+  // hreflang alternates
+  const languages =
+    localePath !== undefined
+      ? {
+          sr: pageUrl("sr", localePath),
+          en: pageUrl("en", localePath),
+          "x-default": pageUrl("sr", localePath),
+        }
+      : undefined;
 
   return {
     title: fullTitle,
@@ -46,6 +63,7 @@ export function buildMetadata({
     metadataBase: new URL(SITE_URL),
     alternates: {
       canonical: canonicalUrl,
+      ...(languages && { languages }),
     },
     openGraph: {
       title: fullTitle,

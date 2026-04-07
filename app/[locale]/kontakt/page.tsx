@@ -1,20 +1,30 @@
+import { getTranslations } from "next-intl/server";
 import { buildMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { CONTACT } from "@/lib/constants";
 
-export const metadata = buildMetadata({
-  title: "Kontakt",
-  description: "Kontaktirajte PB Architect — projektovanje, inženjering i urbanizam u Novom Sadu.",
-});
+type Props = { params: Promise<{ locale: string }> };
 
-export default function KontaktPage() {
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "kontakt" });
+  return buildMetadata({ title: t("metaTitle"), description: t("metaDesc") });
+}
+
+export default async function KontaktPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "kontakt" });
+
   return (
     <>
       <PageHero
-        title="Kontakt"
-        subtitle="Pošaljite nam poruku i odgovorićemo u najkraćem mogućem roku."
-        breadcrumbs={[{ label: "Početna", href: "/" }, { label: "Kontakt" }]}
+        title={t("heroTitle")}
+        subtitle={t("heroSubtitle")}
+        breadcrumbs={[
+          { label: t("breadcrumbHome"), href: "/" },
+          { label: t("heroTitle") },
+        ]}
       />
 
       <section className="bg-white px-6 py-20">
@@ -30,14 +40,14 @@ export default function KontaktPage() {
               <div className="space-y-10">
                 <div>
                   <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-                    Adresa
+                    {t("address")}
                   </p>
                   <address className="not-italic text-[#1a1a1a]">{CONTACT.address}</address>
                 </div>
 
                 <div>
                   <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-                    Email
+                    {t("email")}
                   </p>
                   <a
                     href={`mailto:${CONTACT.email}`}
@@ -49,7 +59,7 @@ export default function KontaktPage() {
 
                 <div>
                   <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-                    Telefon
+                    {t("phone")}
                   </p>
                   <a
                     href={CONTACT.phoneHref}
@@ -60,10 +70,7 @@ export default function KontaktPage() {
                 </div>
 
                 <div className="border-t border-[#e0ddd8] pt-10">
-                  <p className="text-sm leading-relaxed text-[#6b6b6b]">
-                    Radno vreme: radnim danima od 9 do 17h. Za hitne upite slobodno nas pozovite
-                    direktno.
-                  </p>
+                  <p className="text-sm leading-relaxed text-[#6b6b6b]">{t("workHours")}</p>
                 </div>
               </div>
             </div>
@@ -80,7 +87,7 @@ export default function KontaktPage() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="PB Architect lokacija"
+          title={t("mapTitle")}
         />
       </section>
     </>

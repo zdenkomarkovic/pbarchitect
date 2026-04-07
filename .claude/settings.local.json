@@ -4,7 +4,10 @@
       "Bash(dir:*)",
       "Bash(node --version:*)",
       "Bash(npm:*)",
-      "Bash(grep -v \"^$\")"
+      "Bash(grep -v \"^$\")",
+      "Bash(grep -E \"\\\\.\\(tsx?|json\\)$\")",
+      "Bash(xargs wc:*)",
+      "Bash(rm:*)"
     ]
   }
 }

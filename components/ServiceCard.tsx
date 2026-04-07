@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 
 interface ServiceCardProps {
   number: string;
@@ -7,12 +8,14 @@ interface ServiceCardProps {
   href: string;
 }
 
-export function ServiceCard({
+export async function ServiceCard({
   number,
   title,
   description,
   href,
 }: ServiceCardProps) {
+  const t = await getTranslations("common");
+
   return (
     <Link
       href={href}
@@ -28,8 +31,15 @@ export function ServiceCard({
         {description}
       </p>
       <span className="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-        Saznajte više
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        {t("learnMore")}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </span>

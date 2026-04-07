@@ -1,45 +1,50 @@
+import { getTranslations } from "next-intl/server";
 import { buildMetadata } from "@/lib/metadata";
 import { ServiceCard } from "@/components/ServiceCard";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { CONTACT } from "@/lib/constants";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
-export const metadata = buildMetadata({
-  title: "Početna",
-  description: "PB Architect — projektovanje, inženjering i urbanizam u Novom Sadu.",
-});
+type Props = { params: Promise<{ locale: string }> };
 
-const services = [
-  {
-    number: "01",
-    title: "Projektovanje",
-    description:
-      "Izrađujemo kompletnu tehničku dokumentaciju u svim fazama — od idejne skice do projekta izvedenog objekta. Iskustvo u stambenim, poslovnim, industrijskim i javnim objektima.",
-    href: "/projektovanje",
-  },
-  {
-    number: "02",
-    title: "Inženjering i nadzor",
-    description:
-      "Pružamo stručni tehnički nadzor i upravljanje realizacijom projekata. Tim iskusnih inženjera garantuje usklađenost izvođenja sa projektnom dokumentacijom i propisima.",
-    href: "/inzenjering-i-nadzor",
-  },
-  {
-    number: "03",
-    title: "Zaštita životne sredine",
-    description:
-      "Izrađujemo studije procene uticaja na životnu sredinu, dokumentaciju za upravljanje otpadom, planove zaštite od udesa i planove zaštite od požara za industrijska postrojenja.",
-    href: "/zastita-zivotne-sredine",
-  },
-];
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home" });
+  return buildMetadata({
+    title: undefined,
+    description: t("heroSubtitle"),
+  });
+}
 
-export default function HomePage() {
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home" });
+
+  const services = [
+    {
+      number: "01",
+      title: t("service1Title"),
+      description: t("service1Desc"),
+      href: "/projektovanje",
+    },
+    {
+      number: "02",
+      title: t("service2Title"),
+      description: t("service2Desc"),
+      href: "/inzenjering-i-nadzor",
+    },
+    {
+      number: "03",
+      title: t("service3Title"),
+      description: t("service3Desc"),
+      href: "/zastita-zivotne-sredine",
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
       <section className="relative flex h-[calc(100vh-4.5rem)] flex-col justify-end overflow-hidden bg-[#1a1a1a]">
-        {/* Desktop hero */}
         <Image
           src="/hero.webp"
           alt="PB Architect"
@@ -47,39 +52,37 @@ export default function HomePage() {
           className="hidden object-cover md:block"
           priority
         />
-        {/* Mobile hero */}
         <Image
           src="/heromob.webp"
           alt="PB Architect"
           fill
           className="block object-cover md:hidden"
           priority
-        />{" "}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/80 z-[1]" />
-        <div className="relative z-10 mx-auto w-full max-w-7xl  pb-6 pt-8">
-          <div className=" px-6">
+        />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl pb-6 pt-8">
+          <div className="px-6">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#c4a84f]">
-              Novi Sad — Srbija
+              {t("heroLocation")}
             </p>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-6xl font-light leading-none text-white ">
-              Arhitektura koja traje - Arhitektonski Biro <br /> PB ARCHITECT
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-light leading-none text-white md:text-6xl">
+              {t("heroTitle")}
             </h1>
-            <p className="mt-4  text-sm leading-relaxed text-[#aaa] md:text-lg">
-              Projektujemo, nadziremo i planiramo. PB Architect je partner koji vas vodi od prve
-              ideje do gotovog objekta.
+            <p className="mt-4 text-sm leading-relaxed text-[#aaa] md:text-lg">
+              {t("heroSubtitle")}
             </p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
                 href="/projektovanje"
                 className="bg-[#c4a84f] px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-[#a8893a]"
               >
-                Naše usluge
+                {t("heroServices")}
               </Link>
               <a
                 href="#kontakt"
                 className="border border-white/30 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:border-white"
               >
-                Kontakt
+                {t("heroContact")}
               </a>
             </div>
           </div>
@@ -91,10 +94,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-              Šta radimo
+              {t("servicesLabel")}
             </p>
             <h2 className="font-[family-name:var(--font-heading)] text-4xl font-light text-[#1a1a1a] md:text-5xl">
-              Naše usluge
+              {t("servicesTitle")}
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -111,25 +114,18 @@ export default function HomePage() {
           <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[2fr_3fr]">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-                O nama
+                {t("aboutLabel")}
               </p>
               <h2 className="font-[family-name:var(--font-heading)] text-4xl font-light text-[#1a1a1a] md:text-5xl">
-                Stručnost i posvećenost u svakom projektu
+                {t("aboutTitle")}
               </h2>
-              <p className="mt-6 text-[#6b6b6b] leading-relaxed">
-                PB Architect je projektantski biro sa sedištem u Novom Sadu. Bavimo se izradom
-                tehničke dokumentacije, urbanizmom i tehničkim nadzorom. Svaki projekat tretiramo
-                individualno — jer svaki klijent ima jedinstven prostor, budžet i viziju.
-              </p>
-              <p className="mt-4 text-[#6b6b6b] leading-relaxed">
-                Sarađujemo sa investitorima, izvođačima i javnim institucijama kroz sve faze
-                izgradnje, od ishođenja dozvola do tehničkog prijema objekta.
-              </p>
+              <p className="mt-6 leading-relaxed text-[#6b6b6b]">{t("aboutP1")}</p>
+              <p className="mt-4 leading-relaxed text-[#6b6b6b]">{t("aboutP2")}</p>
             </div>
             <div className="relative aspect-video w-full overflow-hidden rounded-lg">
               <Image
                 src="/Gemini_Generated_Image_rjt8y8rjt8y8rjt8.webp"
-                alt="O nama — PB Architect"
+                alt={t("aboutImgAlt")}
                 fill
                 className="object-cover"
               />
@@ -144,9 +140,9 @@ export default function HomePage() {
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl font-light md:text-4xl">
-                Pokrenite vaš projekat danas
+                {t("contactTitle")}
               </h2>
-              <p className="mt-2 text-[#1a1a1a]">Kontaktirajte nas za besplatnu konsultaciju.</p>
+              <p className="mt-2 text-[#1a1a1a]">{t("contactSubtitle")}</p>
             </div>
             <div className="flex flex-col gap-3 text-base">
               <a

@@ -1,31 +1,18 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-
-const projektovanjeLinks = [
-  { label: "Projektovanje", href: "/projektovanje" },
-  { label: "IDR — Idejno rešenje", href: "/projektovanje/idr" },
-  { label: "PGD — Projekat za građevinsku dozvolu", href: "/projektovanje/pgd" },
-  { label: "Enterijer", href: "/projektovanje/enterijer" },
-  { label: "Eksterijer", href: "/projektovanje/eksterijer" },
-  { label: "Proračuni troškova", href: "/projektovanje/proracuni-troskova" },
-];
-
-const urbanizamLinks = [
-  { label: "Urbanizam", href: "/urbanizam" },
-  { label: "Urbanistički projekat (UP)", href: "/urbanizam/urbanisticki-projekat" },
-  { label: "Projekat parcelacije", href: "/urbanizam/projekat-parcelacije" },
-  { label: "Urbanistički planovi", href: "/urbanizam/urbanisticki-planovi" },
-];
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface DropdownProps {
   label: string;
+  allServicesLabel: string;
   links: { label: string; href: string }[];
 }
 
-function Dropdown({ label, links }: DropdownProps) {
+function Dropdown({ label, allServicesLabel, links }: DropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -61,13 +48,12 @@ function Dropdown({ label, links }: DropdownProps) {
 
       {open && (
         <div className="absolute left-0 top-full z-50 mt-2 min-w-64 border border-[#e0ddd8] bg-white shadow-lg">
-          {/* First item is the section root — visually separated */}
           <Link
             href={links[0]?.href ?? "/"}
             onClick={() => setOpen(false)}
             className="block border-b border-[#e0ddd8] px-5 py-3 text-xs font-semibold uppercase tracking-widest text-[#c4a84f] transition-colors hover:bg-[#f8f7f4]"
           >
-            {links[0]?.label} — sve usluge
+            {allServicesLabel}
           </Link>
           {links.slice(1).map((link) => (
             <Link
@@ -86,9 +72,26 @@ function Dropdown({ label, links }: DropdownProps) {
 }
 
 export function Header() {
+  const t = useTranslations("nav");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProjOpen, setMobileProjOpen] = useState(false);
   const [mobileUrbOpen, setMobileUrbOpen] = useState(false);
+
+  const projektovanjeLinks = [
+    { label: t("design"), href: "/projektovanje" },
+    { label: t("design_idr"), href: "/projektovanje/idr" },
+    { label: t("design_pgd"), href: "/projektovanje/pgd" },
+    { label: t("design_interior"), href: "/projektovanje/enterijer" },
+    { label: t("design_exterior"), href: "/projektovanje/eksterijer" },
+    { label: t("design_costs"), href: "/projektovanje/proracuni-troskova" },
+  ];
+
+  const urbanizamLinks = [
+    { label: t("urbanism"), href: "/urbanizam" },
+    { label: t("urbanism_project"), href: "/urbanizam/urbanisticki-projekat" },
+    { label: t("urbanism_parcelation"), href: "/urbanizam/projekat-parcelacije" },
+    { label: t("urbanism_plans"), href: "/urbanizam/urbanisticki-planovi" },
+  ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#e0ddd8] bg-white/95 backdrop-blur-sm">
@@ -110,46 +113,58 @@ export function Header() {
             href="/"
             className="text-sm tracking-wide text-[#6b6b6b] transition-colors hover:text-[#c4a84f]"
           >
-            Početna
+            {t("home")}
           </Link>
-          <Dropdown label="Projektovanje" links={projektovanjeLinks} />
-          <Dropdown label="Urbanizam" links={urbanizamLinks} />
+          <Dropdown
+            label={t("design")}
+            allServicesLabel={t("design_allServices")}
+            links={projektovanjeLinks}
+          />
+          <Dropdown
+            label={t("urbanism")}
+            allServicesLabel={t("urbanism_allServices")}
+            links={urbanizamLinks}
+          />
           <Link
             href="/inzenjering-i-nadzor"
             className="text-sm tracking-wide text-[#6b6b6b] transition-colors hover:text-[#c4a84f]"
           >
-            Inženjering i nadzor
+            {t("engineering")}
           </Link>
           <Link
             href="/zastita-zivotne-sredine"
             className="text-sm tracking-wide text-[#6b6b6b] transition-colors hover:text-[#c4a84f]"
           >
-            Zaštita životne sredine
+            {t("environment")}
           </Link>
           <Link
             href="/kontakt"
             className="text-sm tracking-wide text-[#6b6b6b] transition-colors hover:text-[#c4a84f]"
           >
-            Kontakt
+            {t("contact")}
           </Link>
+          <LanguageSwitcher />
         </nav>
 
         {/* Mobile burger */}
-        <button
-          className="flex flex-col gap-1.5 md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Otvori meni"
-        >
-          <span
-            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <LanguageSwitcher />
+          <button
+            className="flex flex-col gap-1.5"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={t("openMenu")}
+          >
+            <span
+              className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-[#1a1a1a] transition-opacity ${mobileOpen ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-0.5 w-6 bg-[#1a1a1a] transition-transform ${mobileOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -161,7 +176,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
             >
-              Početna
+              {t("home")}
             </Link>
 
             {/* Projektovanje accordion */}
@@ -170,7 +185,7 @@ export function Header() {
                 onClick={() => setMobileProjOpen(!mobileProjOpen)}
                 className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-[#1a1a1a]"
               >
-                Projektovanje
+                {t("design")}
                 <svg
                   width="12"
                   height="12"
@@ -205,7 +220,7 @@ export function Header() {
                 onClick={() => setMobileUrbOpen(!mobileUrbOpen)}
                 className="flex w-full items-center justify-between py-3 text-sm tracking-wide text-[#1a1a1a]"
               >
-                Urbanizam
+                {t("urbanism")}
                 <svg
                   width="12"
                   height="12"
@@ -239,21 +254,21 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
             >
-              Inženjering i nadzor
+              {t("engineering")}
             </Link>
             <Link
               href="/zastita-zivotne-sredine"
               onClick={() => setMobileOpen(false)}
               className="border-b border-[#f0ede8] py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
             >
-              Zaštita životne sredine
+              {t("environment")}
             </Link>
             <Link
-              href="#kontakt"
+              href="/kontakt"
               onClick={() => setMobileOpen(false)}
               className="py-3 text-sm tracking-wide text-[#1a1a1a] hover:text-[#c4a84f]"
             >
-              Kontakt
+              {t("contact")}
             </Link>
           </nav>
         </div>

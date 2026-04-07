@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface FormState {
   ime: string;
@@ -12,6 +13,7 @@ interface FormState {
 type Status = "idle" | "sending" | "success" | "error";
 
 export function ContactForm() {
+  const t = useTranslations("contactForm");
   const [form, setForm] = useState<FormState>({
     ime: "",
     email: "",
@@ -45,14 +47,12 @@ export function ContactForm() {
       } else {
         const data = await res.json();
         setErrorMsg(
-          typeof data.error === "string"
-            ? data.error
-            : "Slanje nije uspelo. Pokušajte ponovo.",
+          typeof data.error === "string" ? data.error : t("errorDefault"),
         );
         setStatus("error");
       }
     } catch {
-      setErrorMsg("Greška pri slanju. Proverite internet konekciju.");
+      setErrorMsg(t("errorNetwork"));
       setStatus("error");
     }
   }
@@ -61,21 +61,26 @@ export function ContactForm() {
     return (
       <div className="flex flex-col items-start gap-4 border border-[#c4a84f] bg-[#fdf9f0] p-8">
         <div className="flex h-12 w-12 items-center justify-center bg-[#c4a84f]">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.5"
+          >
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
         <h3 className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[#1a1a1a]">
-          Poruka je poslata!
+          {t("successTitle")}
         </h3>
-        <p className="text-[#6b6b6b]">
-          Hvala na poruci. Odgovorićemo vam u najkraćem roku.
-        </p>
+        <p className="text-[#6b6b6b]">{t("successText")}</p>
         <button
           onClick={() => setStatus("idle")}
           className="mt-2 text-sm text-[#c4a84f] underline underline-offset-4 hover:no-underline"
         >
-          Pošalji novu poruku
+          {t("sendAnother")}
         </button>
       </div>
     );
@@ -83,14 +88,15 @@ export function ContactForm() {
 
   const inputClass =
     "w-full border border-[#e0ddd8] bg-white px-4 py-3 text-sm text-[#1a1a1a] placeholder-[#bbb] outline-none transition-colors focus:border-[#c4a84f]";
-  const labelClass = "mb-1.5 block text-xs font-semibold uppercase tracking-widest text-[#6b6b6b]";
+  const labelClass =
+    "mb-1.5 block text-xs font-semibold uppercase tracking-widest text-[#6b6b6b]";
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="ime" className={labelClass}>
-            Ime i prezime <span className="text-[#c4a84f]">*</span>
+            {t("nameRequired")}
           </label>
           <input
             id="ime"
@@ -99,14 +105,14 @@ export function ContactForm() {
             required
             value={form.ime}
             onChange={handleChange}
-            placeholder="Vaše ime"
+            placeholder={t("namePlaceholder")}
             className={inputClass}
           />
         </div>
 
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email adresa <span className="text-[#c4a84f]">*</span>
+            {t("emailRequired")}
           </label>
           <input
             id="email"
@@ -115,7 +121,7 @@ export function ContactForm() {
             required
             value={form.email}
             onChange={handleChange}
-            placeholder="vasa@email.com"
+            placeholder={t("emailPlaceholder")}
             className={inputClass}
           />
         </div>
@@ -123,7 +129,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="telefon" className={labelClass}>
-          Broj telefona
+          {t("phoneLabel")}
         </label>
         <input
           id="telefon"
@@ -138,7 +144,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="poruka" className={labelClass}>
-          Poruka <span className="text-[#c4a84f]">*</span>
+          {t("messageRequired")}
         </label>
         <textarea
           id="poruka"
@@ -147,7 +153,7 @@ export function ContactForm() {
           rows={6}
           value={form.poruka}
           onChange={handleChange}
-          placeholder="Opišite vaš projekat ili upit..."
+          placeholder={t("messagePlaceholder")}
           className={`${inputClass} resize-none`}
         />
       </div>
@@ -163,15 +169,30 @@ export function ContactForm() {
       >
         {status === "sending" ? (
           <>
-            <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              className="animate-spin"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M21 12a9 9 0 1 1-6.219-8.56" />
             </svg>
-            Slanje...
+            {t("sending")}
           </>
         ) : (
           <>
-            Pošalji poruku
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {t("submit")}
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </>

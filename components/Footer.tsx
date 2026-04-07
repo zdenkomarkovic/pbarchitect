@@ -1,15 +1,19 @@
-import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { CONTACT } from "@/lib/constants";
 
-const serviceLinks = [
-  { label: "Projektovanje", href: "/projektovanje" },
-  { label: "Urbanizam", href: "/urbanizam" },
-  { label: "Inženjering i nadzor", href: "/inzenjering-i-nadzor" },
-  { label: "Zaštita životne sredine", href: "/zastita-zivotne-sredine" },
-];
+export async function Footer() {
+  const t = await getTranslations("footer");
+  const tNav = await getTranslations("nav");
 
-export function Footer() {
+  const serviceLinks = [
+    { label: tNav("design"), href: "/projektovanje" },
+    { label: tNav("urbanism"), href: "/urbanizam" },
+    { label: tNav("engineering"), href: "/inzenjering-i-nadzor" },
+    { label: tNav("environment"), href: "/zastita-zivotne-sredine" },
+  ];
+
   return (
     <footer id="kontakt" className="bg-[#1a1a1a] text-white">
       <div className="mx-auto max-w-7xl px-6 py-10">
@@ -26,14 +30,14 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-[#999]">
-              Projektovanje, inženjering i urbanizam. Pouzdani partner u svakoj fazi izgradnje.
+              {t("tagline")}
             </p>
           </div>
 
           {/* Links */}
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-              Usluge
+              {t("services")}
             </p>
             <nav className="flex flex-col gap-3">
               {serviceLinks.map((link) => (
@@ -51,7 +55,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#c4a84f]">
-              Kontakt
+              {t("contact")}
             </p>
             <address className="not-italic">
               <p className="text-sm text-[#999]">{CONTACT.address}</p>
@@ -71,12 +75,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-[#333] pt-6 pb-2 flex flex-wrap justify-center gap-x-6 gap-y-1">
+        <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-1 border-t border-[#333] pb-2 pt-6">
           <p className="text-sm text-[#aaa]">
-            © {new Date().getFullYear()} PB Architect. Sva prava zadržana.
+            © {new Date().getFullYear()} PB Architect. {t("copyright")}
           </p>
           <p className="text-sm text-[#aaa]">
-            Izrada sajta:{" "}
+            {t("madeBy")}:{" "}
             <a
               href="https://manikamwebsolutions.com/"
               target="_blank"

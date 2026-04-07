@@ -1,21 +1,15 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  // Strict mode za React - hvata potencijalne probleme ranije
   reactStrictMode: true,
 
-  // Optimizacija slika - dodaj domene po potrebi
   images: {
-    remotePatterns: [
-      // Primer:
-      // {
-      //   protocol: "https",
-      //   hostname: "example.com",
-      // },
-    ],
+    remotePatterns: [],
   },
 
-  // Headers za bolju sigurnost
   async headers() {
     return [
       {
@@ -31,4 +25,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

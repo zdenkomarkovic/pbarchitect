@@ -48,7 +48,7 @@ export default async function HomePage({ params }: Props) {
       {/* Hero */}
       <section className="relative flex h-[calc(100vh-4.5rem)] flex-col justify-end overflow-hidden bg-[#1a1a1a]">
         <Image
-          src="/hero.png"
+          src="/Gemini_Generated_Image_nrxp3fnrxp3fnrxp.png"
           alt="PB Architect"
           fill
           className="hidden object-cover md:block"

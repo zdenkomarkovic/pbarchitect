@@ -48,7 +48,7 @@ export default async function HomePage({ params }: Props) {
       {/* Hero */}
       <section className="relative flex h-[calc(100vh-4.5rem)] flex-col justify-end overflow-hidden bg-[#1a1a1a]">
         <Image
-          src="/Gemini_Generated_Image_nrxp3fnrxp3fnrxp.png"
+          src="/Gemini_Generated_Image_ce6lxice6lxice6l (1) (1).png"
           alt="PB Architect"
           fill
           className="hidden object-cover md:block"
@@ -64,12 +64,18 @@ export default async function HomePage({ params }: Props) {
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/10 via-black/30 to-black/70" />
         <div className="relative z-10 mx-auto w-full max-w-7xl pb-6 pt-8">
           <div className="px-6">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#c4a84f]">
+            <p className="mb-4 md:hidden text-xs font-semibold uppercase tracking-[0.3em] text-[#c4a84f]">
               {t("heroLocation")}
             </p>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-light leading-none text-white md:text-6xl">
-              <span className="block">{t("heroTitleLine1")}</span>
-              <span className="block">PB ARCHITECT</span>
+            <h1 className="font-[family-name:var(--font-heading)] text-4xl font-light leading-none text-white md:text-5xl">
+              <span className="block md:inline">{t("heroTitleLine1")}</span>
+              <span className="block">
+                {" "}
+                PB ARCHITECT{" "}
+                <span className="text-2xl ml-20 hidden md:inline font-extrabold uppercase tracking-[0.3em] text-[#c4a84f]">
+                  {t("heroLocation")}
+                </span>{" "}
+              </span>
             </h1>
             <p className="mt-4 text-sm leading-relaxed text-[#aaa] md:text-lg">
               {t("heroSubtitle")}

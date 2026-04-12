@@ -8,7 +8,7 @@ type PageEntry = {
 };
 
 const pages: PageEntry[] = [
-  { path: "/", priority: 1, changeFrequency: "monthly" },
+  { path: "/", priority: 1.0, changeFrequency: "monthly" },
   { path: "/projektovanje", priority: 0.9, changeFrequency: "monthly" },
   { path: "/projektovanje/idr", priority: 0.8, changeFrequency: "yearly" },
   { path: "/projektovanje/pgd", priority: 0.8, changeFrequency: "yearly" },
@@ -37,17 +37,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const page of pages) {
+    const sr = srUrl(page.path);
+    const en = enUrl(page.path);
+
+    const languages = {
+      sr: sr,
+      en: en,
+      "x-default": sr,
+    };
+
+    // SR verzija — sa alternates ka EN
     entries.push({
-      url: srUrl(page.path),
+      url: sr,
       lastModified,
       changeFrequency: page.changeFrequency,
       priority: page.priority,
+      alternates: { languages },
     });
+
+    // EN verzija — sa alternates ka SR
     entries.push({
-      url: enUrl(page.path),
+      url: en,
       lastModified,
       changeFrequency: page.changeFrequency,
       priority: Math.round(page.priority * 0.9 * 10) / 10,
+      alternates: { languages },
     });
   }
 

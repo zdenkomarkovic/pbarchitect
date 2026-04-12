@@ -19,6 +19,7 @@ export default async function ProracuniPage({ params }: Props) {
   return (
     <>
       <PageHero
+        locale={locale}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         breadcrumbs={[

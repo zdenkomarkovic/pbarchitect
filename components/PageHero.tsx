@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import { SITE_URL } from "@/lib/constants";
 
 interface BreadcrumbItem {
   label: string;
@@ -10,6 +11,7 @@ interface PageHeroProps {
   subtitle?: string;
   breadcrumbs?: BreadcrumbItem[];
   dark?: boolean;
+  locale?: string;
 }
 
 export function PageHero({
@@ -17,8 +19,38 @@ export function PageHero({
   subtitle,
   breadcrumbs,
   dark = false,
+  locale = "sr",
 }: PageHeroProps) {
+  const breadcrumbSchema =
+    breadcrumbs && breadcrumbs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumbs.map((crumb, i) => {
+            const itemUrl = crumb.href
+              ? locale === "en"
+                ? `${SITE_URL}/en${crumb.href === "/" ? "" : crumb.href}`
+                : crumb.href === "/"
+                  ? SITE_URL
+                  : `${SITE_URL}${crumb.href}`
+              : undefined;
+            return {
+              "@type": "ListItem",
+              position: i + 1,
+              name: crumb.label,
+              ...(itemUrl && { item: itemUrl }),
+            };
+          }),
+        }
+      : null;
   return (
+    <>
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+      )}
     <section
       className={`px-6 py-20 ${dark ? "bg-[#1a1a1a] text-white" : "bg-[#f8f7f4] text-[#1a1a1a]"}`}
     >
@@ -56,5 +88,6 @@ export function PageHero({
         )}
       </div>
     </section>
+    </>
   );
 }

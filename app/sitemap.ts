@@ -33,7 +33,7 @@ function enUrl(path: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const lastModified = new Date("2025-06-01");
   const entries: MetadataRoute.Sitemap = [];
 
   for (const page of pages) {

@@ -20,6 +20,7 @@ export default async function EnterijePage({ params }: Props) {
   return (
     <>
       <PageHero
+        locale={locale}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         breadcrumbs={[

@@ -38,6 +38,7 @@ export default async function ProjektovanjePage({ params }: Props) {
   return (
     <>
       <PageHero
+        locale={locale}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         breadcrumbs={[

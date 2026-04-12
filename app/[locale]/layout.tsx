@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": `${SITE_URL}/#business`,
   name: SITE_NAME,
   description:
@@ -31,6 +31,14 @@ const localBusinessSchema = {
   url: SITE_URL,
   telephone: CONTACT.phone,
   email: CONTACT.email,
+  logo: `${SITE_URL}/logo.png`,
+  image: `${SITE_URL}/hero.png`,
+  priceRange: "$$",
+  areaServed: {
+    "@type": "City",
+    name: "Novi Sad",
+    sameAs: "https://www.wikidata.org/wiki/Q598",
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "Paje Marganovića 5",
@@ -51,8 +59,17 @@ const localBusinessSchema = {
       closes: "17:00",
     },
   ],
-  image: `${SITE_URL}/hero.png`,
-  priceRange: "$$",
+  hasMap: "https://maps.google.com/?q=Paje+Marganovi%C4%87a+5,+Novi+Sad",
+  knowsAbout: [
+    "Arhitektura",
+    "Projektovanje objekata",
+    "Idejno rešenje (IDR)",
+    "Projekat za građevinsku dozvolu (PGD)",
+    "Enterijer dizajn",
+    "Tehnički nadzor",
+    "Urbanizam",
+    "Zaštita životne sredine",
+  ],
 };
 
 export function generateStaticParams() {

@@ -25,6 +25,7 @@ export default async function UrbanistickiProjekatPage({ params }: Props) {
   return (
     <>
       <PageHero
+        locale={locale}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         breadcrumbs={[
